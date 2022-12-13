@@ -1,0 +1,15 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "nullifierHash",
+        "type": "uint256"
+      }
+    ],
+    "name": "NullifierHashAdded",
+    "type": "event"
+  }
+]
