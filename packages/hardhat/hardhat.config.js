@@ -17,7 +17,7 @@ module.exports = {
   solidity: "0.8.4",
   networks: {
     hardhat: {
-      chainId: 1337,
+      chainId: 31337,
     },
   },
   abiExporter: {

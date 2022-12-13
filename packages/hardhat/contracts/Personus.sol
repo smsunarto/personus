@@ -12,7 +12,7 @@ contract Personus {
 
     address public admin;
     uint256 public groupId;
-    uint256 private applicationIdCounter = 0;
+    uint256 public applicationIdCounter = 0;
     ISemaphore public semaphore;
 
     mapping(uint256 => PersonusMember) public users; // identityCommitment => PersonusMember
