@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "semaphoreAddress",
+        "name": "_semaphoreAddress",
         "type": "address"
       },
       {
@@ -14,6 +14,25 @@
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "identityCommitment",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "applicationId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewApplication",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -48,29 +67,102 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "applicationId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewVouch",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_identityCommitment",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_username",
+        "type": "bytes32"
+      }
+    ],
+    "name": "addGenesisMember",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "admin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "applications",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "identityCommitment",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "vouchCount",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "bytes32",
-        "name": "greeting",
+        "name": "_vouchMsg",
         "type": "bytes32"
       },
       {
         "internalType": "uint256",
-        "name": "merkleTreeRoot",
+        "name": "_applicationId",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "nullifierHash",
+        "name": "_merkleTreeRoot",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_nullifierHash",
         "type": "uint256"
       },
       {
         "internalType": "uint256[8]",
-        "name": "proof",
+        "name": "_proof",
         "type": "uint256[8]"
       }
     ],
-    "name": "greet",
+    "name": "castVouch",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -79,12 +171,43 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "identityCommitment",
+        "name": "_identityCommitment",
+        "type": "uint256"
+      }
+    ],
+    "name": "createApplication",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "groupId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_identityCommitment",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_applicationId",
         "type": "uint256"
       },
       {
         "internalType": "bytes32",
-        "name": "username",
+        "name": "_username",
         "type": "bytes32"
       }
     ],
@@ -101,6 +224,35 @@
         "internalType": "contract ISemaphore",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "users",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "username",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "applicationId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isMember",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
