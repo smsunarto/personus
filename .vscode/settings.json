@@ -1,5 +1,0 @@
-{
-  "solidity.defaultCompiler": "localNodeModule",
-  "solidity.compileUsingRemoteVersion": "v0.8.4+commit.c7e474f2",
-  "solidity.compileUsingLocalVersion": "/Users/smsunarto/git/personus/soljson-v0.8.4+commit.c7e474f2.js"
-}
