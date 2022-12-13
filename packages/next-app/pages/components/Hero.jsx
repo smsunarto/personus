@@ -4,7 +4,7 @@ import React from "react";
 function Hero() {
   return (
     <>
-      <Container maxW={"1100px"} h={"39vh"} px={"2rem"}>
+      <Container maxW={"1100px"} h={"15vh"} px={"2rem"}>
         <Flex
           flexDirection={"column"}
           alignItems={"center"}

@@ -1,74 +1,42 @@
-# 🦄 Web3 Starter Kit
+# 🦄 Personus
 
-A quick starter to build on Ethereum and Polygon! 💜
->Stack used Next.js, Chakra-UI, Hardhat, Rainbow Wallet, Wagmi 🚀
+## Identity generation and onboarding interface
 
-<br/>
+The frontend can be found at `packages/next-app`
 
-![image](https://bafybeifacspez7tdlba5auczy5qqpqg3mhyakhorp4jvjesyeiaxn33gwm.ipfs.dweb.link/cover.png)
+To play with it, go to the hardhat folder and run
 
-<br/>
-
-
-# 🏄‍♂️ Quick Start
-
-Prerequisites: [Node (v16 LTS)](https://nodejs.org/en/download/) plus [Yarn](https://classic.yarnpkg.com/en/docs/install/) and [Git](https://git-scm.com/downloads)
-
-> clone/fork 🦄 web3-starter-kit:
-
-```bash
-git clone https://github.com/lakshh07/Web3-Starter-Kit.git
+```
+yarn chain
+yarn hardhat deploy --group 42 --network localhost
 ```
 
-> install your 👷‍ dependencies:
+Then go to the next-app folder and run
 
-```bash
-cd web3-starter-kit
-yarn install
 ```
-
-> in a second terminal window, start your 📱 frontend:
-
-```bash
-cd web3-starter-kit
 yarn dev
 ```
->Contract are deployed on Polygon Mumbai
 
-<br/>
+![https://i.imgur.com/MZxs50g.png](https://i.imgur.com/MZxs50g.png)
 
-<hr/>
- 
- >📣  Checkout branches for `React.js` and `Typescript`
+## Smart Contracts
 
-<hr/>
+The project contains two smart contracts
 
-<br/>
+- `Personus`: The core personus contract that provides vouch-based identity commitment induction
+- `PersonusConsumer`: A demo contract that consumes the Personus identity commitments
 
-🔏 Edit your smart contract `Greeter.sol` in `packages/hardhat/contracts`
+### Tests
 
-📝 Edit your frontend `index.js` in `packages/next-app/pages/`
+The tests for the smart contract can be found at `/packages/hardhat/test`
 
-💼 Edit your deployment scripts `deploy.js` in `packages/hardhat/scripts`
+```
+yarn test
+```
 
-📱 Open http://localhost:3000 to see the app
+![https://i.imgur.com/trPApgz.png](https://i.imgur.com/trPApgz.png)
 
-🌍 You need an RPC key for testnets and production deployments, create an [Alchemy](https://www.alchemy.com/) account and replace the value of `ALCHEMY_KEY = xxx` in `packages/hardhat/.env` with your new key.
+## Acknowledgement
 
-<br/>
-
-# 📚 Learn More
-
-Solidity: https://docs.soliditylang.org/en/v0.8.14/
-<br/>
-Next.js: https://nextjs.org/docs
-<br/>
-ChakraUI: https://chakra-ui.com/docs/components/overview
-<br/>
-Hardhat: https://hardhat.org/getting-started/
-<br/>
-Rainbow Kit: https://www.rainbowkit.com/docs/introduction <br/>
-Wagmi: https://wagmi.sh/docs/getting-started
-<br/>
-Ether.js: https://docs.ethers.io/v5/
-
+- Written for https://rdi.berkeley.edu/berkeley-defi/f22
+- Work built on top of Semaphore (https://github.com/semaphore-protocol/semaphore)

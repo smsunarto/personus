@@ -97,7 +97,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Container
-        mb={"5em"}
+        mb={"1em"}
         border="1px solid #CBD5E0"
         rounded={"10px"}
         p={"2em"}

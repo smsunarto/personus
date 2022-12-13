@@ -18,8 +18,11 @@ import {
 } from "wagmi";
 import { personusAddress } from "../../utils/contractAddress";
 import contractAbi from "../../contracts/ABI/Personus.json";
+import { Identity } from "@semaphore-protocol/identity";
+import { ethers } from "ethers";
 
 function CreateApplication() {
+  const [_identity, setIdentity] = useState();
   const [id, setId] = useState();
   const toast = useToast();
 
@@ -33,11 +36,22 @@ function CreateApplication() {
     },
   });
 
-  const { config, error } = usePrepareContractWrite({
+  const { config } = usePrepareContractWrite({
     addressOrName: personusAddress,
     contractInterface: contractAbi,
     functionName: "createApplication",
-    args: [1231],
+    args: [_identity?.commitment.toString()],
+  });
+
+  const { config: joinGroupConfig } = usePrepareContractWrite({
+    addressOrName: personusAddress,
+    contractInterface: contractAbi,
+    functionName: "joinGroup",
+    args: [
+      _identity?.commitment.toString(),
+      "0",
+      ethers.utils.formatBytes32String("foobar"),
+    ],
   });
 
   const {
@@ -47,8 +61,19 @@ function CreateApplication() {
     write,
   } = useContractWrite(config);
 
+  const {
+    data: postData2,
+    isLoading: postIsLoading2,
+    isSuccess: postIsSuccess2,
+    write: write2,
+  } = useContractWrite(joinGroupConfig);
+
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: postData?.hash,
+  });
+
+  const { isLoading2, isSuccess2 } = useWaitForTransaction({
+    hash: postData2?.hash,
   });
 
   useEffect(() => {
@@ -70,7 +95,40 @@ function CreateApplication() {
         isClosable: true,
         position: "bottom-right",
       });
-  }, [isSuccess, isLoading, postIsSuccess, postData, toast]);
+
+    isLoading2 &&
+      toast({
+        title: "Transaction Sent",
+        description: postData2?.hash,
+        status: "info",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+
+    isSuccess2 &&
+      toast({
+        title: "Transaction Successfull",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+
+    const identityString = localStorage.getItem("personus-identity-1");
+
+    setIdentity(new Identity(identityString));
+  }, [
+    isSuccess,
+    isLoading,
+    isSuccess2,
+    isLoading2,
+    postIsSuccess,
+    postIsSuccess2,
+    postData,
+    postData2,
+    toast,
+  ]);
 
   return (
     <>
@@ -108,21 +166,23 @@ function CreateApplication() {
 
           <Flex w={"60%"} justifyContent={"space-around"} alignItems={"center"}>
             <Text>
-              Now, let's request some vote from genesis members to get you in.
+              You have to wait until three members vouched for your application,
+              afterwards you can click the button below to submit your identity
+              commitment to Personus.
             </Text>
           </Flex>
 
           <Button
-            isLoading={postIsLoading || isLoading}
+            isLoading={postIsLoading2 || isLoading2}
             fontWeight={"700"}
             onClick={() => write()}
-            isDisabled={!write}
+            isDisabled={!write2}
           >
-            Request Vote
+            Join Personus Group
           </Button>
           <Text>
-            {id && isSuccess
-              ? `Your application ID is ${id}`
+            {isSuccess2
+              ? `Welcome to Personus!. Your identity commitment is ${_identity.commitment}`
               : "Waiting for transaction..."}
           </Text>
         </Stack>
